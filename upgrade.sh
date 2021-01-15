@@ -48,6 +48,7 @@ upgrade()
 	sysupgrade -v sysupgrade.bin
 }
 
+# source OPENWRT_BOARD
 . /etc/os-release
 
 OPENWRT_MODEL=$(sed -n 's/.*"id":\s"\([^"]\+\)",.*/\1/p' /etc/board.json)
