@@ -16,6 +16,23 @@ for example:
     ```
     OPENWRT_VERSION=19.07.5
     ```
+
+1. execute the `./batch_upgrade.sh <host-to-upgrade>` to upgrade the openwrt instance.
+
+    ```
+    ./batch_upgrade.sh <host-to-upgrade>
+    ```
+
+    where `host-to-upgrade` is the host to be upgrade, we will sync scripts via `rsync`.
+    Defined the host in ~/.ssh/config is recommended, else you will need to specified the host
+    in `root@host` format.
+
+1. upgrade finish, checking if the openwrt instance is running well.
+
+## Inner of ./batch_upgrade.sh
+
+the `./batch_upgrade.sh` executes following steps:
+
 1. upload scripts to the openwrt instance
 
     ```
