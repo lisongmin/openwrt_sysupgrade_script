@@ -1,4 +1,4 @@
 
 OPENWRT_REPO=downloads.openwrt.org
 OPENWRT_MIRROR=mirrors.tuna.tsinghua.edu.cn/openwrt
-OPENWRT_VERSION=19.07.5
+OPENWRT_VERSION=19.07.6
