@@ -1,4 +1,10 @@
 
+# TODO
+
+* [ ] snapshot version supported
+* [ ] keep all preinstalled pkg after upgrade. I prefer add a features directory, and collect the install script for each feature.
+    and then, we can specified which feature we needed via hostname.
+
 # Howto use the scripts
 
 1. Setting the repository mirror if download speed is poor from the official site.
@@ -24,10 +30,10 @@ for example:
     ```
 
     where `host-to-upgrade` is the host to be upgrade, we will sync scripts via `rsync`.
-    Defined the host in ~/.ssh/config is recommended, else you will need to specified the host
-    in `root@host` format.
+    Config the host in ~/.ssh/config is recommended, else you will need to specified the host
+    in `root@host` form.
 
-1. upgrade finish, checking if the openwrt instance is running well.
+1. Upgrade finish. Checking if the openwrt instance is running well.
 
 ## Inner of ./batch_upgrade.sh
 
@@ -55,9 +61,3 @@ the `./batch_upgrade.sh` executes following steps:
 1. After router start up, the upgrade is success.
 ssh to the openwrt instance and cd to the `/etc/openwrt_upgrade_script` directory.
 1. we should install extra package now. running the `./install.sh`
-
-# TODO
-
-* [ ] snapshot version supported
-* [ ] keep all preinstalled pkg after upgrade. I prefer add a features directory, and collect the install script for each feature.
-    and then, we can specified which feature we needed via hostname.
