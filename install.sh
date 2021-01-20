@@ -32,3 +32,4 @@ opkg install curl rsync || exit $?
 
 echo "step: enable https for uhttpd"
 opkg install luci-ssl-openssl libuhttpd-openssl || exit $?
+service uhttpd reload
