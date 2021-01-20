@@ -57,7 +57,7 @@ if [ -z "$OPENWRT_MODEL" ];then
 	exit 1
 fi
 
-for envfile in env models/${OPENWRT_MODEL}/env ; do
+for envfile in env models/${OPENWRT_MODEL}/env .local_env ; do
 	if [ -e "${_dir}/${envfile}" ];then
 		. "${_dir}/${envfile}"
 	fi

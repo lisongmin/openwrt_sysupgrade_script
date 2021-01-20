@@ -1,0 +1,3 @@
+
+# set local environments in the .local_env file, e.g. OPENWRT_MIRROR
+/.local_env
