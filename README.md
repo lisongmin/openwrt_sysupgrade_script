@@ -1,11 +1,13 @@
 
-# TODO
+# openwrt_sysupgrade_script
+
+## TODO
 
 * [ ] snapshot version supported
 * [ ] keep all preinstalled pkg after upgrade. I prefer add a features directory, and collect the install script for each feature.
     and then, we can specified which feature we needed via hostname.
 
-# Howto use the scripts
+## Howto use the scripts
 
 1. Setting the repository mirror if download speed is poor from the official site.
 Edit the `.local_env` file (create if not exists), and add `OPENWRT_MIRROR` field to it,
@@ -35,7 +37,7 @@ for example:
 
 1. Upgrade finish. Checking if the openwrt instance is running well.
 
-## Inner of ./batch_upgrade.sh
+### Inner of ./batch_upgrade.sh
 
 the `./batch_upgrade.sh` executes following steps:
 
