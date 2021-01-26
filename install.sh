@@ -14,7 +14,7 @@ opkg update
 echo "step: enable tls support for wget, curl"
 opkg list-installed|grep libustream &>/dev/null
 if [ $? -ne 0 ];then
-	opkg install libustream-openssl || exit $?
+	opkg install libustream-${OPENWRT_SSL_LIB} || exit $?
 fi
 opkg install ca-bundle || exit $?
 
@@ -30,5 +30,10 @@ if [ "$OPENWRT_IS_SNAPSHOT" = "true" ];then
 fi
 
 echo "step: enable https for uhttpd"
-opkg install luci-ssl-openssl libuhttpd-openssl || exit $?
+if [ "$OPENWRT_SSL_LIB" = "wolfssl" ];then
+	LUCI_SSL=luci-ssl
+else
+	LUCI_SSL=luci-ssl-"$OPENWRT_SSL_LIB"
+fi
+opkg install $LUCI_SSL libuhttpd-${OPENWRT_SSL_LIB} || exit $?
 /etc/init.d/uhttpd reload

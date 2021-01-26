@@ -1,6 +1,8 @@
 
 export OPENWRT_REPO=downloads.openwrt.org
 export OPENWRT_VERSION=19.07.6
+export OPENWRT_SSL_LIB=openssl
+export OPENWRT_SNAPSHOT_SSL_LIB=wolfssl
 
 prepare_env()
 {
@@ -25,6 +27,7 @@ prepare_env()
 	if [ "$VERSION_ID" = "snapshot" ];then
 		export OPENWRT_IS_SNAPSHOT=true
 		export OPENWRT_MIRROR=${OPENWRT_SNAPSHOT_MIRROR:-$OPENWRT_MIRROR}
+		export OPENWRT_SSL_LIB=${OPENWRT_SNAPSHOT_SSL_LIB:-$OPENWRT_SSL_LIB}
 		export OPENWRT_URL=https://${OPENWRT_MIRROR:-$OPENWRT_REPO}/snapshots/targets/${OPENWRT_BOARD}
 		export OPENWRT_SYSUPGRADE_FILE=openwrt-$(echo ${OPENWRT_BOARD}|tr '/' '-')-${OPENWRT_MODEL}-squashfs-sysupgrade.bin
 	else
