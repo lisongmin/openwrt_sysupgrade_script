@@ -25,7 +25,7 @@ prepare_env()
 	if [ "$VERSION_ID" = "snapshot" ];then
 		export OPENWRT_IS_SNAPSHOT=true
 		export OPENWRT_MIRROR=${OPENWRT_SNAPSHOT_MIRROR:-$OPENWRT_MIRROR}
-		export OPENWRT_URL=https://${OPENWRT_MIRROR:-$OPENWRT_REPO}/snapshot/targets/${OPENWRT_BOARD}
+		export OPENWRT_URL=https://${OPENWRT_MIRROR:-$OPENWRT_REPO}/snapshots/targets/${OPENWRT_BOARD}
 		export OPENWRT_SYSUPGRADE_FILE=openwrt-$(echo ${OPENWRT_BOARD}|tr '/' '-')-${OPENWRT_MODEL}-squashfs-sysupgrade.bin
 	else
 		export OPENWRT_IS_SNAPSHOT=false
