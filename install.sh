@@ -12,7 +12,11 @@ fi
 opkg update
 
 echo "step: enable tls support for wget, curl"
-opkg install libustream-openssl ca-bundle || exit $?
+opkg list-installed|grep libustream &>/dev/null
+if [ $? -ne 0 ];then
+	opkg install libustream-openssl || exit $?
+fi
+opkg install ca-bundle || exit $?
 
 echo "step: enable https for opkg."
 sed -i 's/http:/https:/g' /etc/opkg/distfeeds.conf
