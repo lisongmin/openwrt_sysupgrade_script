@@ -4,24 +4,21 @@ _dir=$(dirname $0)
 
 download()
 {
-	local openwrt_url=https://${OPENWRT_MIRROR:-$OPENWRT_REPO}/releases/${OPENWRT_VERSION}/targets/${OPENWRT_BOARD}
-	local sysupgrade_file=openwrt-${OPENWRT_VERSION}-$(echo ${OPENWRT_BOARD}|tr '/' '-')-${OPENWRT_MODEL}-squashfs-sysupgrade.bin
-
 	echo "step: download checksum file"
-	curl -L -O -C - --retry 20 ${openwrt_url}/sha256sums
+	curl -L -O -C - --retry 20 ${OPENWRT_URL}/sha256sums
 
 	local expect_checksum
-	expect_checksum=$(cat sha256sums|grep ${sysupgrade_file}|awk '{print $1}')
+	expect_checksum=$(cat sha256sums|grep ${OPENWRT_SYSUPGRADE_FILE}|awk '{print $1}')
 	if [ -z "$expect_checksum" ];then
-		echo "Error: Can not get checksum of ${sysupgrade_file}."
+		echo "Error: Can not get checksum of ${OPENWRT_SYSUPGRADE_FILE}."
 		return 1
 	fi
 
 	echo "step: download sysupgrade file"
-	curl -L -O -C - --retry 20 ${openwrt_url}/${sysupgrade_file}
+	curl -L -O -C - --retry 20 ${OPENWRT_URL}/${OPENWRT_SYSUPGRADE_FILE}
 
 	local real_checksum
-	real_checksum=$(sha256sum ${sysupgrade_file}|awk '{print $1}')
+	real_checksum=$(sha256sum ${OPENWRT_SYSUPGRADE_FILE}|awk '{print $1}')
 
 	if [ "$expect_checksum" != "$real_checksum" ];then
 		echo "Error: Checksum miss match."
@@ -31,7 +28,7 @@ download()
 	fi
 
 	echo "step: link sysupgrade.bin to downloaded file"
-	ln -sf ${sysupgrade_file} sysupgrade.bin
+	ln -sf ${OPENWRT_SYSUPGRADE_FILE} sysupgrade.bin
 }
 
 keep_upgrade_script()
@@ -48,20 +45,8 @@ upgrade()
 	sysupgrade -v sysupgrade.bin
 }
 
-# source OPENWRT_BOARD
-. /etc/os-release
-
-OPENWRT_MODEL=$(sed -n 's/.*"id":\s"\([^"]\+\)",.*/\1/p' /etc/board.json)
-if [ -z "$OPENWRT_MODEL" ];then
-	echo "ERROR: Can not detect device model via /etc/board.json"
-	exit 1
-fi
-
-for envfile in env models/${OPENWRT_MODEL}/env .local_env ; do
-	if [ -e "${_dir}/${envfile}" ];then
-		. "${_dir}/${envfile}"
-	fi
-done
+. ${_dir}/env
+prepare_env "${_dir}"
 
 mkdir -p /tmp/openwrt_upgrade
 cd /tmp/openwrt_upgrade

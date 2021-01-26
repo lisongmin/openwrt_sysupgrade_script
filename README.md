@@ -3,7 +3,7 @@
 
 ## TODO
 
-* [ ] snapshot version supported
+* [x] snapshot version supported
 * [ ] keep all preinstalled pkg after upgrade. I prefer add a features directory, and collect the install script for each feature.
     and then, we can specified which feature we needed via hostname.
 
@@ -14,7 +14,7 @@ Edit the `.local_env` file (create if not exists), and add `OPENWRT_MIRROR` fiel
 for example:
 
     ```
-    OPENWRT_MIRROR=mirrors.tuna.tsinghua.edu.cn/openwrt
+    export OPENWRT_MIRROR=mirrors.tuna.tsinghua.edu.cn/openwrt
     ```
 
     You should select the proper mirror that near to you.
@@ -22,7 +22,7 @@ for example:
 1. change the openwrt version you wanted via `OPENWRT_VERSION` field in `env` file
 
     ```
-    OPENWRT_VERSION=19.07.5
+    export OPENWRT_VERSION=19.07.5
     ```
 
 1. execute the `./batch_upgrade.sh <host-to-upgrade>` to upgrade the openwrt instance.

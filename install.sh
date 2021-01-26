@@ -2,17 +2,8 @@
 
 _dir=$(dirname $0)
 
-OPENWRT_MODEL=$(sed -n 's/.*"id":\s"\([^"]\+\)",.*/\1/p' /etc/board.json)
-if [ -z "$OPENWRT_MODEL" ];then
-	echo "ERROR: Can not detect device model via /etc/board.json"
-	exit 1
-fi
-
-for envfile in env models/${OPENWRT_MODEL}/env .local_env ; do
-	if [ -e "${_dir}/${envfile}" ];then
-		. "${_dir}/${envfile}"
-	fi
-done
+. ${_dir}/env
+prepare_env "${_dir}"
 
 if [ -n "$OPENWRT_MIRROR" ];then
 	echo "step: setting repo mirrors."
@@ -29,6 +20,10 @@ opkg update
 
 echo "step: install common softwares"
 opkg install curl rsync || exit $?
+
+if [ "$OPENWRT_IS_SNAPSHOT" = "true" ];then
+	opkg install luci
+fi
 
 echo "step: enable https for uhttpd"
 opkg install luci-ssl-openssl libuhttpd-openssl || exit $?
