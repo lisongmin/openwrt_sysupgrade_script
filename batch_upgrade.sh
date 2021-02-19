@@ -11,7 +11,7 @@ EOF
 
 echo "step: waiting $host start up"
 for x in `seq 200` ; do
-    ssh $host ls &>/dev/null
+    ssh -o ConnectTimeout=5 $host ls &>/dev/null
     if [ $? -eq 0 ];then
         break
     fi
