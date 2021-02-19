@@ -1,6 +1,6 @@
 
 export OPENWRT_REPO=downloads.openwrt.org
-export OPENWRT_VERSION=19.07.6
+export OPENWRT_VERSION=19.07.7
 export OPENWRT_SSL_LIB=openssl
 export OPENWRT_SNAPSHOT_SSL_LIB=wolfssl
 
