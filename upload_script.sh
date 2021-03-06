@@ -8,4 +8,4 @@ if [ -z "$host" ];then
     exit 1
 fi
 
-rsync -avC ${_dir} ${host}:/etc/openwrt_upgrade_script/
+rsync -rlptvC ${_dir} ${host}:/etc/openwrt_upgrade_script/
