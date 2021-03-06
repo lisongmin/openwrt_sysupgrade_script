@@ -37,3 +37,8 @@ else
 fi
 opkg install $LUCI_SSL libuhttpd-${OPENWRT_SSL_LIB} || exit $?
 /etc/init.d/uhttpd reload
+
+echo "step: restore user installed packages"
+if [ -e "$_dir/.user_installed_packages" ]; then
+	opkg install $(cat ${_dir}/.user_installed_packages)
+fi

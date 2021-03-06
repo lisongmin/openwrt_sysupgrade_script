@@ -39,6 +39,13 @@ keep_upgrade_script()
 	fi
 }
 
+save_user_installed_packages()
+{
+	echo "step: save user installed packages"
+	awk '/^Package:/{PKG= $2};  /^Status: .*user installed/{print PKG}' /usr/lib/opkg/status > "${_dir}/.user_installed_packages"
+}
+
+
 upgrade()
 {
 	echo "step: Upgrade."
@@ -48,9 +55,11 @@ upgrade()
 . ${_dir}/env
 prepare_env "${_dir}"
 
+keep_upgrade_script
+save_user_installed_packages
+
 mkdir -p /tmp/openwrt_upgrade
 cd /tmp/openwrt_upgrade
 
-keep_upgrade_script
 download || exit $?
 upgrade

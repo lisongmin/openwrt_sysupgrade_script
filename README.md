@@ -4,8 +4,8 @@
 ## TODO
 
 * [x] snapshot version supported
-* [ ] keep all preinstalled pkg after upgrade. I prefer add a features directory, and collect the install script for each feature.
-    and then, we can specified which feature we needed via hostname.
+* [x] keep all preinstalled pkg after upgrade. ~~I prefer add a features directory, and collect the install script for each feature.~~
+    ~~and then, we can specified which feature we needed via hostname.~~
 
 ## Howto use the scripts
 
